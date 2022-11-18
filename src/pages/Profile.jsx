@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Profile = ({ userData, logOut }) => {
   return (
-    <div className="h-[450px] w-[350px] bg-[#6D9886] rounded-xl flex flex-col items-center justify-center gap-3 relative">
+    <div className="h-[450px] w-[350px] bg-[#6D9886] rounded-xl flex flex-col items-center justify-center gap-3 px-4 relative">
       <img
         className="w-2h-28 h-28 rounded-full ring-4 ring-[#393E46]"
         src={userData?.photoURL}
@@ -11,7 +11,13 @@ const Profile = ({ userData, logOut }) => {
       <h2 className="font-semibold text-lg text-[#F2E7D5]">
         {userData?.displayName}
       </h2>
+
       <p className="font-semibold text-lg text-[#F2E7D5]">{userData?.email}</p>
+
+      <div className="text-center">
+        <span className="font-semibold text-[#393E46] "></span>
+        <span>Account created on: {userData?.metadata?.creationTime}</span>
+      </div>
 
       <Link
         to="/"
