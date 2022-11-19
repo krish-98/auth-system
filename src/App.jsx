@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
+  TwitterAuthProvider,
 } from "firebase/auth"
 import { auth } from "./firebase"
 import Profile from "./pages/Profile"
@@ -14,6 +15,7 @@ import { Navigate } from "react-router-dom"
 function App() {
   const [userData, setUserData] = useState("")
   const googleProvider = new GoogleAuthProvider()
+  const twitterProvider = new TwitterAuthProvider()
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -43,7 +45,16 @@ function App() {
       })
   }
 
-  console.log(userData)
+  const signInWithTwitter = async () => {
+    try {
+      const twitterData = signInWithPopup(auth, twitterProvider)
+      console.log(twitterData)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // console.log(userData)
 
   return (
     <div className="h-screen flex justify-center items-center bg-[#393E46]">
@@ -52,7 +63,10 @@ function App() {
           path="/"
           element={
             !userData ? (
-              <SignIn signInWithGoogle={signInWithGoogle} />
+              <SignIn
+                signInWithGoogle={signInWithGoogle}
+                signInWithTwitter={signInWithTwitter}
+              />
             ) : (
               <Navigate to="profile" />
             )
