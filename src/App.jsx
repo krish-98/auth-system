@@ -47,7 +47,7 @@ function App() {
 
   const signInWithTwitter = async () => {
     try {
-      const twitterData = signInWithPopup(auth, twitterProvider)
+      const twitterData = await signInWithPopup(auth, twitterProvider)
       console.log(twitterData)
     } catch (error) {
       console.log(error)
